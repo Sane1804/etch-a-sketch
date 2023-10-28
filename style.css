@@ -12,6 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color:#142d4c;
 }
 
 #container {
@@ -25,10 +26,10 @@ body {
 #screen {
     width: 600px;
     height: 600px;
-    border: 10px solid red;
+    border: 10px solid gray;
     display: grid;
     gap: 1px;
-    background-color: gray;
+    background-color: aquamarine;
 }
 
 

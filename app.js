@@ -1,19 +1,19 @@
 const screen = document.querySelector("#screen");
 
-let userInput = document.querySelector(".userInput");
+const userInput = document.querySelector(".userInput");
 
-let userValue = userInput.value = 15;
+const USER_VALUE = userInput.value = 15;
 
-const amountOfBoxes = Number(userValue) * Number(userValue);
+const amountOfBoxes = Number(USER_VALUE) * Number(USER_VALUE);
 
-let arr = [Number(userValue)];
+let arr = [Number(USER_VALUE)];
 
 const gridTemplateCol = (strNum) => {
     const input = strNum;
     const output = "repeat("+input+", auto)";
     screen.style.gridTemplateColumns = output;
 }
-gridTemplateCol(userValue);
+gridTemplateCol(USER_VALUE);
 
 
 const appendBoxes = (amount) => {
@@ -51,7 +51,6 @@ const amount = (array) => {
 
 userInput.addEventListener('input', function () {
     const value = this.value;
-    console.log(arr[0], arr[1]);
 
     if (arr.length < 2){
         arr.push(Number(value))
@@ -67,5 +66,4 @@ userInput.addEventListener('input', function () {
         removeBoxes(amount(arr))
         gridTemplateCol(value)
     }
-    console.log(arr);
 })
