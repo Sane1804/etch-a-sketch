@@ -8,6 +8,7 @@ const amountOfBoxes = Number(USER_VALUE) * Number(USER_VALUE);
 
 let arr = [Number(USER_VALUE)];
 
+
 const gridTemplateCol = (strNum) => {
     const input = strNum;
     const output = "repeat("+input+", auto)";
@@ -16,15 +17,39 @@ const gridTemplateCol = (strNum) => {
 gridTemplateCol(USER_VALUE);
 
 
+const paint = (arg) => {
+    arg.target.style.backgroundColor = "red";
+}
+
+const onAndOffPainting = (nodelist) => {
+    const boxes = nodelist;
+    boxes.forEach(elem => {
+        elem.addEventListener("click", (e) => {
+            if (elem.style.backgroundColor !== "red"){
+                boxes.forEach(element => {
+                    element.addEventListener("mouseover", paint, true);
+                });
+            } else {
+                boxes.forEach(element => {
+                    element.removeEventListener("mouseover", paint, true);
+                });
+            }
+        })
+    })
+}
+
 const appendBoxes = (amount) => {
     const times = amount;
     for (let i = 0; i < times; i++){
         const box = document.createElement("div");
         box.classList.add("boxes");
-        screen.appendChild(box);    
+        screen.appendChild(box);
     }
+    let boxes = document.querySelectorAll(".boxes");
+    onAndOffPainting(boxes);
 }
 appendBoxes(Number(amountOfBoxes));
+
 
 const removeBoxes = (amount) => {
     const times = amount;
@@ -49,8 +74,17 @@ const amount = (array) => {
 }
 
 
+
+
+
 userInput.addEventListener('input', function () {
     const value = this.value;
+    const BOXES = document.querySelectorAll(".boxes");
+    
+    BOXES.forEach(elem => {
+        elem.removeEventListener("mouseover", paint, true)
+        elem.style.backgroundColor = "white"
+    })
 
     if (arr.length < 2){
         arr.push(Number(value))
