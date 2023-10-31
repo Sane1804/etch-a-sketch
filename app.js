@@ -2,7 +2,7 @@ const screen = document.querySelector("#screen");
 
 const userInput = document.querySelector(".userInput");
 
-const USER_VALUE = userInput.value = 15;
+const USER_VALUE = userInput.value = 60;
 
 const amountOfBoxes = Number(USER_VALUE) * Number(USER_VALUE);
 
@@ -23,15 +23,18 @@ const paint = (arg) => {
 
 const onAndOffPainting = (nodelist) => {
     const boxes = nodelist;
+    let count = 0;
     boxes.forEach(elem => {
         elem.addEventListener("click", (e) => {
-            if (elem.style.backgroundColor !== "red"){
+            if (count < 1){
                 boxes.forEach(element => {
                     element.addEventListener("mouseover", paint, true);
+                    count++
                 });
             } else {
                 boxes.forEach(element => {
                     element.removeEventListener("mouseover", paint, true);
+                    count--;
                 });
             }
         })
