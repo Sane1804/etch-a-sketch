@@ -8,6 +8,8 @@ const amountOfBoxes = Number(USER_VALUE) * Number(USER_VALUE);
 
 let arr = [Number(USER_VALUE)];
 
+let count = 0;
+
 
 const gridTemplateCol = (strNum) => {
     const input = strNum;
@@ -39,7 +41,7 @@ const paint = (arg) => {
 
 const onAndOffPainting = (nodelist) => {
     const boxes = nodelist;
-    let count = 0;
+    // let count = 0;
     boxes.forEach(elem => {
         elem.addEventListener("click", (e) => {
             if (count < 1){
@@ -103,6 +105,7 @@ userInput.addEventListener('input', function () {
     BOXES.forEach(elem => {
         elem.removeEventListener("mouseover", paint, true)
         elem.style.backgroundColor = "white"
+        count = 0;
     })
 
     if (arr.length < 2){
