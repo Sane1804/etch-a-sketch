@@ -17,8 +17,24 @@ const gridTemplateCol = (strNum) => {
 gridTemplateCol(USER_VALUE);
 
 
+const randomColor = () => {
+    
+    const value = () => {
+        let arr = [];
+        for (let i = 0; i < 3; i++){
+            arr.push(Math.floor(Math.random() * 256));
+        }
+        let output = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
+        return output;
+    }
+    document.addEventListener("mousemove", value);
+
+    return value();
+}
+
+
 const paint = (arg) => {
-    arg.target.style.backgroundColor = "red";
+    arg.target.style.backgroundColor = randomColor();
 }
 
 const onAndOffPainting = (nodelist) => {
