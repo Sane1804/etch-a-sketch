@@ -9,9 +9,12 @@
 <body>
     <div id="container">
         <div id="toolbar">
+            <label for="btn" ><input id="btn" type="button" value="clear"></label>
             <input type="color">
-            <label for="btn-radio-color"><input id="btn-radio-color" type="radio" value="color" name="colors" checked>Color</label>
-            <label for="btn-radio-random"><input id="btn-radio-random" type="radio" value="random color" name="colors">Random Color</label>
+            <div>
+                <label for="btn-radio-color"><input id="btn-radio-color" type="radio" value="color" name="colors" checked>Color</label>
+                <label for="btn-radio-random"><input id="btn-radio-random" type="radio" value="random color" name="colors">Random Color</label>
+            </div>    
             <input class="userInput" type="number" max="64" min="1">  
         </div>
         <div id="screen"></div>

@@ -1,16 +1,20 @@
 const screen = document.querySelector("#screen");
 
-const userInput = document.querySelector(".userInput");
+const numberInput = document.querySelector(".userInput");
 
-const USER_VALUE = userInput.value = 60;
+const COL_VALUE = numberInput.value = 60;
 
-const amountOfBoxes = Number(USER_VALUE) * Number(USER_VALUE);
+const amountOfBoxes = Number(COL_VALUE) * Number(COL_VALUE);
 
-let arr = [Number(USER_VALUE)];
+// this arr keep track of the last two values passed from number input
+let arr = [Number(COL_VALUE)];
 
-let count = 0;
+//use to activate and desactivate painting.
+let flag = true;
 
-const radio = document.querySelectorAll('input[type="radio"]');
+let box;
+
+const radios = document.querySelectorAll('input[type="radio"]');
 
 const checkedRadio = document.querySelector('input[type="radio"]:checked');
 
@@ -20,13 +24,17 @@ let inputColor = document.querySelector('input[type="color"]');
 
 let colorValue = inputColor.value;
 
+let clearBtn = document.querySelector("#btn");
+
+
+console.log(flag)
 
 const gridTemplateCol = (strNum) => {
     const input = strNum;
     const output = "repeat("+input+", auto)";
     screen.style.gridTemplateColumns = output;
 }
-gridTemplateCol(USER_VALUE);
+gridTemplateCol(COL_VALUE);
 
 
 const randomColor = () => {
@@ -58,7 +66,7 @@ function getCheckedValue(){
     radioValue = value;
 }
 
-radio.forEach(input => {
+radios.forEach(input => {
     input.addEventListener('input', getCheckedValue);
 })
 
@@ -75,23 +83,24 @@ const paint = (arg) => {
     arg.target.style.backgroundColor = color();
 }
 
+
+
+
 const onAndOffPainting = (nodelist) => {
     const boxes = nodelist;
-    // let count = 0;
     boxes.forEach(elem => {
-        elem.addEventListener("click", (e) => {
-            if (count < 1){
+        elem.addEventListener("click", () => {
+            if (flag){
                 boxes.forEach(element => {
                     element.addEventListener("mouseover", paint, true);
-                    count++
                 });
             } else {
                 boxes.forEach(element => {
                     element.removeEventListener("mouseover", paint, true);
-                    count--;
                 });
             }
         })
+        
     })
 }
 
@@ -103,6 +112,7 @@ const appendBoxes = (amount) => {
         screen.appendChild(box);
     }
     let boxes = document.querySelectorAll(".boxes");
+    box = boxes;
     onAndOffPainting(boxes);
 }
 appendBoxes(Number(amountOfBoxes));
@@ -130,19 +140,37 @@ const amount = (array) => {
     return output;
 }
 
+const clearColor = () => {
+    let boxes = document.querySelectorAll(".boxes");
+    boxes.forEach(box => {
+        box.style.backgroundColor = "white";
+        box.removeEventListener("mouseover", paint, true);
+    })
+    flag = true;
+}
+clearBtn.addEventListener("click", clearColor)
 
 
 
+box.forEach(item =>{
+    item.addEventListener("click" , ()=> {
+        flag = !flag
+        console.log(flag)
+    })
+})
 
-userInput.addEventListener('input', function () {
+
+numberInput.addEventListener('input', function () {
     const value = this.value;
     const BOXES = document.querySelectorAll(".boxes");
+    flag = true;
     
     BOXES.forEach(elem => {
         elem.removeEventListener("mouseover", paint, true)
         elem.style.backgroundColor = "white"
-        count = 0;
     })
+
+    
 
     if (arr.length < 2){
         arr.push(Number(value))
@@ -158,4 +186,5 @@ userInput.addEventListener('input', function () {
         removeBoxes(amount(arr))
         gridTemplateCol(value)
     }
+    console.log(flag)
 })
