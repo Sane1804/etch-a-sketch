@@ -10,13 +10,15 @@ let arr = [Number(USER_VALUE)];
 
 let count = 0;
 
-
-
 const radio = document.querySelectorAll('input[type="radio"]');
 
 const checkedRadio = document.querySelector('input[type="radio"]:checked');
 
 let radioValue = checkedRadio.value;
+
+let inputColor = document.querySelector('input[type="color"]');
+
+let colorValue = inputColor.value;
 
 
 const gridTemplateCol = (strNum) => {
@@ -43,6 +45,14 @@ const randomColor = () => {
 }
 
 
+function getColor() {
+    let value = this.value;
+    colorValue = value;
+}
+
+inputColor.addEventListener("input", getColor)
+
+
 function getCheckedValue(){
     let value = this.value;
     radioValue = value;
@@ -54,7 +64,7 @@ radio.forEach(input => {
 
 const color = () => {
     if (radioValue == "color"){
-        return "black"
+        return colorValue;
     } else {
         return randomColor();
     }
