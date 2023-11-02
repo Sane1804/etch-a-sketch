@@ -23,6 +23,11 @@ body {
     align-items: flex-end;
 }
 
+#toolbar {
+    display: flex;
+    gap: 10px;
+}
+
 #screen {
     width: 600px;
     height: 600px;

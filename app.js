@@ -11,6 +11,14 @@ let arr = [Number(USER_VALUE)];
 let count = 0;
 
 
+
+const radio = document.querySelectorAll('input[type="radio"]');
+
+const checkedRadio = document.querySelector('input[type="radio"]:checked');
+
+let radioValue = checkedRadio.value;
+
+
 const gridTemplateCol = (strNum) => {
     const input = strNum;
     const output = "repeat("+input+", auto)";
@@ -30,13 +38,31 @@ const randomColor = () => {
         return output;
     }
     document.addEventListener("mousemove", value);
-
+    
     return value();
 }
 
 
+function getCheckedValue(){
+    let value = this.value;
+    radioValue = value;
+}
+
+radio.forEach(input => {
+    input.addEventListener('input', getCheckedValue);
+})
+
+const color = () => {
+    if (radioValue == "color"){
+        return "black"
+    } else {
+        return randomColor();
+    }
+}
+
+
 const paint = (arg) => {
-    arg.target.style.backgroundColor = randomColor();
+    arg.target.style.backgroundColor = color();
 }
 
 const onAndOffPainting = (nodelist) => {
@@ -74,7 +100,7 @@ appendBoxes(Number(amountOfBoxes));
 
 const removeBoxes = (amount) => {
     const times = amount;
-    for (let i = 0; i < amount; i++){
+    for (let i = 0; i < times; i++){
         screen.removeChild(screen.firstChild);
     }
 }
