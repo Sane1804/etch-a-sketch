@@ -2,7 +2,7 @@ const screen = document.querySelector("#screen");
 
 const numberInput = document.querySelector(".userInput");
 
-const COL_VALUE = numberInput.value = 60;
+const COL_VALUE = numberInput.value = 10;
 
 const amountOfBoxes = Number(COL_VALUE) * Number(COL_VALUE);
 
@@ -11,8 +11,6 @@ let arr = [Number(COL_VALUE)];
 
 //use to activate and desactivate painting.
 let flag = true;
-
-let box;
 
 const radios = document.querySelectorAll('input[type="radio"]');
 
@@ -26,8 +24,8 @@ let colorValue = inputColor.value;
 
 let clearBtn = document.querySelector("#btn");
 
+let allBoxes;
 
-console.log(flag)
 
 const gridTemplateCol = (strNum) => {
     const input = strNum;
@@ -112,7 +110,7 @@ const appendBoxes = (amount) => {
         screen.appendChild(box);
     }
     let boxes = document.querySelectorAll(".boxes");
-    box = boxes;
+    allBoxes = boxes
     onAndOffPainting(boxes);
 }
 appendBoxes(Number(amountOfBoxes));
@@ -151,25 +149,18 @@ const clearColor = () => {
 clearBtn.addEventListener("click", clearColor)
 
 
+const changeFlag = () => {
+    flag = !flag;
+}
 
-box.forEach(item =>{
-    item.addEventListener("click" , ()=> {
-        flag = !flag
-        console.log(flag)
-    })
+allBoxes.forEach(box => {
+    box.addEventListener("click", changeFlag)
 })
 
 
 numberInput.addEventListener('input', function () {
     const value = this.value;
-    const BOXES = document.querySelectorAll(".boxes");
     flag = true;
-    
-    BOXES.forEach(elem => {
-        elem.removeEventListener("mouseover", paint, true)
-        elem.style.backgroundColor = "white"
-    })
-
     
 
     if (arr.length < 2){
@@ -186,5 +177,11 @@ numberInput.addEventListener('input', function () {
         removeBoxes(amount(arr))
         gridTemplateCol(value)
     }
-    console.log(flag)
+
+    allBoxes.forEach(box => {
+        box.style.backgroundColor = "white"
+        box.removeEventListener("mouseover", paint, true)
+        box.removeEventListener("click" , changeFlag)
+        box.addEventListener("click", changeFlag);
+    })
 })
