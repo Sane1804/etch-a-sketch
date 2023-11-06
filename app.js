@@ -2,7 +2,7 @@ const screen = document.querySelector("#screen");
 
 const numberInput = document.querySelector(".userInput");
 
-const COL_VALUE = numberInput.value = 10;
+const COL_VALUE = numberInput.value = 10;  
 
 const amountOfBoxes = Number(COL_VALUE) * Number(COL_VALUE);
 
@@ -161,6 +161,11 @@ allBoxes.forEach(box => {
 numberInput.addEventListener('input', function () {
     const value = this.value;
     flag = true;
+    let maxValue = Number(numberInput.getAttribute("max"));
+    
+    if (value > maxValue) {
+        numberInput.value = maxValue;
+    }
     
 
     if (arr.length < 2){
